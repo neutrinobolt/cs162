@@ -1,4 +1,4 @@
-Ben Snider, CS162, 10.3.2023
+# Ben Snider, CS162, 10.3.2023
 This assignment is already late, so I'll keep this short. 
 The file combatant_test.py located in this folder should contain the combatant
 class structure as described in my Google doc, then create create a level 1, water type instance
