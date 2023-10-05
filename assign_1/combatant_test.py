@@ -1,5 +1,7 @@
 # Create combatant class
 
+import random
+
 class Player:
 
     def __init__(self,
@@ -51,6 +53,7 @@ class Player:
         """This should print out all the relevant stats connected to 
         the player. PV is included for development sake.\t"""
         return  f"{self.name}\n\n" \
+                f"\tType: {self.type}\n" \
                 f"\tLevel {self.level}\n" \
                 f"\tXP: {self.xp} out of 50\n" \
                 f"\tHP:{self.skills[0]}\n" \
@@ -71,8 +74,9 @@ class Player:
     
     def view_stats(self) -> str:
         """Prints stats for player use. Hence PV's are removed."""
-        return  f"{self.name}\n\n" \
+        return  f"Stats of {self.name}:\n\n" \
                 f"\tLevel {self.level}\n" \
+                f"\tType: {self.type}\n" \
                 f"\tXP: {self.xp} out of 50\n" \
                 f"\tHP:{self.skills[0]}\n" \
                 f"\tDefense:{self.skills[1]}\n\n" \
@@ -90,7 +94,35 @@ class Player:
             inventory_pretty += f"\t{item}\n"
         return  "Current Inventory:\n" \
                 f"{inventory_pretty}"
-            
-        
-new_player = Player()
-print(new_player.view_inventory())
+
+#Get character name from user, initialize player
+loop = 1
+while loop == 1:
+    try:
+        chosen_name = input("Please enter your character's name " \
+                            "(may not exceed 16 characters):\n")
+        if len(chosen_name) > 10:
+            print("ERROR, name is too long.")
+        else:
+            loop = 0
+    except:
+        print("ERROR, something went wrong. Please try again.")
+
+new_player = Player(name = chosen_name)
+#print(new_player.view_stats())
+
+#Offer 2 randomly selected wooden forms of each weapon type for starting weapon
+
+starting_weapons = ["Wooden Sword",
+                    "Wooden Axe",
+                    "Wooden Spear",
+                    "Wooden Dagger",
+                    "Wooden Bow"]
+open_selection = random.sample(starting_weapons, 2)
+#print(open_selection)
+
+print("Please choose your starting weapon:")
+select_num = 0
+for option in open_selection:
+    print(f"{select_num}: {option}")
+    select_num +=1
