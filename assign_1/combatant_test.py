@@ -47,16 +47,50 @@ class Player:
         self.armor = armor_equipped
         self.inventory = inventory
 
-        def __str__():
-            """not looking for pretty at this point, just functional. Not winning
-            a bestseller or anything with this code."""
-            return  f"{self.name}\n\n" \
-                    f"Level {self.level}\n" \
-                    f"HP:{self.skills[hp_max]}\n" \
-                    f"Defense:{self.skills[def_skill]}\n" \
-                    f"Sword Skill:{self.skills[sword_skill]}\n" \
-                    f"Axe Skill:{self.skills[axe_skill]}\n" \
-                    f"Spear Skill:{self.skills[spear_skill]}\n" \
-                    f"Dagger Skill:{self.skills[dagger_skill]}\n" \
-                    f"Bow Skill:{self.skills[bow_skill]}\n" \
-                    f"Inventory:\n\t{self.inventory}"
+    def __str__(self):
+        """This should print out all the relevant stats connected to 
+        the player. PV is included for development sake.\t"""
+        return  f"{self.name}\n\n" \
+                f"\tLevel {self.level}\n" \
+                f"\tXP: {self.xp} out of 50\n" \
+                f"\tHP:{self.skills[0]}\n" \
+                f"\tHP PV:{self.pvs[0]}\n" \
+                f"\tDefense:{self.skills[1]}\n" \
+                f"\tDefense PV:{self.pvs[1]}\n" \
+                f"\tSword Skill:{self.skills[2]}\n" \
+                f"\tAxe Skill:{self.skills[3]}\n" \
+                f"\tSpear Skill:{self.skills[4]}\n" \
+                f"\tDagger Skill:{self.skills[5]}\n" \
+                f"\tBow Skill:{self.skills[6]}\n" \
+                f"\tSword PV:{self.pvs[2]}\n" \
+                f"\tAxe PV:{self.pvs[3]}\n" \
+                f"\tSpear PV:{self.pvs[4]}\n" \
+                f"\tDagger PV:{self.pvs[5]}\n" \
+                f"\tBow PV:{self.pvs[6]}\n" \
+                f"\tInventory:\n\t{self.inventory}"
+    
+    def view_stats(self) -> str:
+        """Prints stats for player use. Hence PV's are removed."""
+        return  f"{self.name}\n\n" \
+                f"\tLevel {self.level}\n" \
+                f"\tXP: {self.xp} out of 50\n" \
+                f"\tHP:{self.skills[0]}\n" \
+                f"\tDefense:{self.skills[1]}\n\n" \
+                f"\tSword Skill:{self.skills[2]}\n" \
+                f"\tAxe Skill:{self.skills[3]}\n" \
+                f"\tSpear Skill:{self.skills[4]}\n" \
+                f"\tDagger Skill:{self.skills[5]}\n" \
+                f"\tBow Skill:{self.skills[6]}\n" \
+                
+    def view_inventory(self) -> str:
+        "Prints a list of inventory contents."
+
+        inventory_pretty = ""
+        for item in self.inventory:
+            inventory_pretty += f"\t{item}\n"
+        return  "Current Inventory:\n" \
+                f"{inventory_pretty}"
+            
+        
+new_player = Player()
+print(new_player.view_inventory())
