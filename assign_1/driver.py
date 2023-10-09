@@ -14,7 +14,7 @@ view their current stats (excluding PV's) and inventory, or to end the program."
 # Create combatant class
 
 import random
-from Player import Player
+from Player_class  import Player
 
 #Get character name from user, initialize player
 loop = 1
