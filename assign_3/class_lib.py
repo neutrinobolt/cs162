@@ -26,6 +26,30 @@ class Window:
     def mainloop(self):
         self.root.mainloop()
 
+    def open_win(self):
+        """Display start window"""
+    
+        self.label("Insert game here...", 0, 0)
+        self.button("Click here to start!", self.file_win, 0, 1)
+        self.mainloop()
+
+    
+    def file_win(self):
+        """Display file window"""
+        self.file_list = [0,0,0]
+        self.label("Select a file!", 0, 0)
+        self.file_col = 0
+        for file in self.file_list:
+            self.file_col += 1
+            if file is True:
+                pass
+            else:
+                self.label("Empty File", 1, self.file_col)
+                self.button("Create new file", self.create_win, 0, self.file_col)
+
+    def create_win():
+        pass
+
     
 
         
