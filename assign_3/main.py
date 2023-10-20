@@ -1,14 +1,17 @@
 """Main driver file for yet-to-be-named game."""
 
-from class_lib import Window as cl
+import gui_lib as gl
 
 def main():
 
     #Opening window
-    file_select = cl()
-    file_select.file_win()
-    file_select.mainloop()
-    
+    start = gl.Start()
+    file_select = gl.FileList()
+    file_select.file_window.root.withdraw()
+    new_file = gl.NewFile()
+    start.pair_class(file_select)
+    start.start_window.mainloop()
+
 
 if __name__ == "__main__":
     main()
