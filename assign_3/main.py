@@ -9,7 +9,8 @@ def main():
     file_select = gl.FileList()
     file_select.file_window.root.withdraw()
     new_file = gl.NewFile()
-    start.pair_class(file_select)
+    start.window_connect(file_select.file_window)
+    file_select.window_connect(start.start_window)
     start.start_window.mainloop()
 
 
