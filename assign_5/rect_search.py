@@ -6,6 +6,7 @@ and searching through a list of 20 randomly generated values."""
 import tkinter as tk
 from tkinter import messagebox
 import random
+import time
 
 class SearchWindow:
     """Creates a window with three elements: 
@@ -34,6 +35,7 @@ class SearchWindow:
         self.rect_lengths = []
         self.inital_x0 = 10
         self.y0 = 10
+        self.check_index = 0
 
         for rectangle_num in range(20):
             x_step = rectangle_num * 20
@@ -55,19 +57,10 @@ class SearchWindow:
         self.search_val = tk.Entry(self.root)
         self.search_val.grid(column= 0, row= 1)
 
-        #define color changing function
-
-        def color_change(target, candidate, index):
-            if target == candidate:
-                self.canvas.itemconfig(self.rectangles[index],
-                                        fill= self.matched_color)
-            else:
-                self.canvas.itemconfig(self.rectangles[index],
-                                        fill= self.unmatched_color)
 
         #define search function
 
-        def rectangle_search():
+        def rectangle_check():
             """Individually search and highlight each rectangle. 
 
             all rectangles start blue.
@@ -90,23 +83,28 @@ class SearchWindow:
                                      "ERROR! Invalid input. please enter a whole number.")
             else:
                 # Find and higlight all rectangles of input length green, else red
+                
 
-                for index, rect_length in enumerate(self.rect_lengths):
-                    self.root.after(250, 
-                                    lambda: color_change(target_val,
-                                                             rect_length,
-                                                             index))
+                for index, rectangle in enumerate(self.rect_lengths):
+
+                    time.sleep(.25)
+                    self.root.update()
+
+                    if rectangle == target_val:
+                        self.canvas.itemconfig(self.rectangles[index],
+                                            fill= self.matched_color)
+                    else:
+                        self.canvas.itemconfig(self.rectangles[index],
+                                                fill= self.unmatched_color)
+                    
+                    
                 
                 print("Done") #debug
-
-            
-
-        
 
         #create search button
         self.search = tk.Button(self.root,
                                 text= "Search:",
-                                command=rectangle_search)
+                                command=rectangle_check)
         self.search.grid(column= 0, row= 2)
 
     def mainloop(self):
