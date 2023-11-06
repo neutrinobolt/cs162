@@ -17,7 +17,7 @@ class SearchWindow:
     of input value, or raising an error window if an invalid entry is 
     given."""
     def __init__(self):
-        
+
         #define highlight colors (constants)
         self.unchecked_color = "blue"
         self.matched_color = "green"
@@ -49,7 +49,7 @@ class SearchWindow:
                                          fill= self.unchecked_color)
             self.rect_lengths.append(rect_length)
             self.rectangles.append(rectangle)
-        
+
         print(self.rect_lengths) #debug
         print(self.rectangles) #debug
 
@@ -73,7 +73,7 @@ class SearchWindow:
             #Set all to blue
             for rectangle in self.rectangles:
                 self.canvas.itemconfig(rectangle, fill= self.unchecked_color)
-            
+
             # Check for valid input, clean
 
             try:
@@ -83,7 +83,6 @@ class SearchWindow:
                                      "ERROR! Invalid input. please enter a whole number.")
             else:
                 # Find and higlight all rectangles of input length green, else red
-                
 
                 for index, rectangle in enumerate(self.rect_lengths):
 
@@ -96,9 +95,7 @@ class SearchWindow:
                     else:
                         self.canvas.itemconfig(self.rectangles[index],
                                                 fill= self.unmatched_color)
-                    
-                    
-                
+
                 print("Done") #debug
 
         #create search button
@@ -110,3 +107,4 @@ class SearchWindow:
     def mainloop(self):
         """Quick function for running generated windows."""
         self.root.mainloop()
+        
