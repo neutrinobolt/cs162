@@ -50,8 +50,8 @@ class SearchWindow:
             self.rect_lengths.append(rect_length)
             self.rectangles.append(rectangle)
 
-        print(self.rect_lengths) #debug
-        print(self.rectangles) #debug
+        #print(self.rect_lengths) #debug
+        #print(self.rectangles) #debug
 
         # Create entry box
         self.search_val = tk.Entry(self.root)
