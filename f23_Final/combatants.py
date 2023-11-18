@@ -1,8 +1,42 @@
+"""File contains Combatant-based classes. """
 
-class Player:
+import items
+
+class Combatant:
+    """Parent class for all combatants."""
 
     def __init__(self,
-                 name = "Player",
+                 name,
+                 elem_type,
+                 level,
+                 hp_max,
+                 def_skill,
+                 armor_equipped: list,
+                 inventory:list):
+        
+        #Directly derived from params
+        self.name = name
+        self.elem_type = elem_type
+        self.level = level
+        self.hp_max = hp_max
+        self.def_skill = def_skill
+        self.armor_equipped = armor_equipped
+        self.inventory = inventory
+
+        self.opponent = None
+
+    def find_opponent(self,
+                      opponent: lambda: Combatant):
+        """Select another entity of class Combatant as opponent."""
+
+        self.opponent = opponent
+
+
+
+class Player(Combatant):
+    """Initializes player class."""
+    def __init__(self,
+                 name = "No name",
                  elem_type = "Water",
                  level = 1,
                  hp_max = 10,
@@ -21,13 +55,21 @@ class Player:
                  dagger_pv = 0,
                  bow_pv = 0,
                  armor_equipped: list = [],
-                 inventory: list = [] ): 
-        #It was at this moment, after typing out that whole mess, that I 
+                 inventory:list = []):
+        
+        #It was at this moment, after typing out that whole mess, that I
         #realized I may have bitten off more than I could chew.
-        self.name = name
-        self.type = elem_type
-        self.level = level
+
+        super().__init__(name,
+                       elem_type,
+                       level,
+                       hp_max,
+                       def_skill,
+                       armor_equipped,
+                       inventory)
+
         self.xp = xp_current
+        self.hp_current = hp_max
         self.skills = [hp_max,
                        def_skill,
                        sword_skill,
@@ -43,16 +85,14 @@ class Player:
             spear_pv,
             dagger_pv,
             bow_pv]
-        self.armor = armor_equipped
-        self.inventory = inventory
 
     def __str__(self):
         """This should print out all the relevant stats connected to 
         the player. PV is included for file storage."""
-        return  f"{self.name}\n\n" \
-                f"\tType: {self.type}\n" \
+        return  f"{self.name}:\n\n" \
+                f"\tType: {self.elem_type}\n" \
                 f"\tLevel {self.level}\n" \
-                f"\tXP: {self.xp} out of 50\n" \
+                f"\tXP: {self.xp}\n" \
                 f"\tHP:{self.skills[0]}\n" \
                 f"\tHP PV:{self.pvs[0]}\n" \
                 f"\tDefense:{self.skills[1]}\n" \
@@ -73,9 +113,9 @@ class Player:
         """Prints stats for player use. Hence PV's are removed."""
         return  f"Stats of {self.name}:\n\n" \
                 f"\tLevel {self.level}\n" \
-                f"\tType: {self.type}\n" \
-                f"\tXP: {self.xp} out of 50\n" \
-                f"\tHP:{self.skills[0]}\n" \
+                f"\tType: {self.elem_type}\n" \
+                f"\tXP: {self.xp}/50\n" \
+                f"\tHP:{self.skills[0]}/{self.hp_current}\n" \
                 f"\tDefense:{self.skills[1]}\n\n" \
                 f"\tSword Skill:{self.skills[2]}\n" \
                 f"\tAxe Skill:{self.skills[3]}\n" \
@@ -86,14 +126,42 @@ class Player:
     def view_inventory(self) -> str:
         "Prints a list of inventory contents."
 
-        inventory_pretty = ""
+        result = ""
         for item in self.inventory:
-            inventory_pretty += f"\t{item}\n"
+            result += f"\t{item}\n"
         return  "Current Inventory:\n" \
-                f"{inventory_pretty}"
+                f"{result}"
 
-        
-    
-    def obtain(self, item: str):
+    def obtain(self, item: items.Weapon):
         """Adds given item to player inventory."""
-        self.inventory.append(item)
+        self.inventory.append(item.name())
+
+    def attack(self):
+        pass
+
+class Enemy(Combatant):
+    """Initializes Enemy class."""
+
+    def __init__(self,
+                 name= "No name",
+                 elem_type = "water",
+                 level = 1,
+                 hp_max = 10,
+                 def_skill = 1,
+                 armor_equipped: list = [],
+                 inventory: list = [],#values to super
+                 ):
+    
+        super().__init__(name=name,
+                         elem_type=elem_type,
+                         level=level,
+                         hp_max=hp_max,
+                         def_skill=def_skill,
+                         armor_equipped=armor_equipped,
+                         inventory=inventory)
+        
+        def attack(self):
+            pass
+
+        def drop(self):
+            pass
