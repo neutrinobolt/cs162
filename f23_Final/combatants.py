@@ -136,6 +136,8 @@ class Player(Combatant):
         """Adds given item to player inventory."""
         self.inventory.append(item.name())
 
+    
+
     def attack(self):
         pass
 
